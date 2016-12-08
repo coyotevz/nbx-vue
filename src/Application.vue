@@ -91,6 +91,7 @@ export default {
 <style lang="scss">
 @import '~vue-material/src/core/stylesheets/variables.scss';
 $sidebar-size: 280px;
+$breakpoint: 1281px;
 
 html,
 body {
@@ -108,7 +109,7 @@ body {
   flex: 1;
   transition: $swift-ease-out;
 
-  @media (min-width: 1281px) {
+  @media (min-width: $breakpoint) {
     padding-left: $sidebar-size;
   }
 }
@@ -119,7 +120,7 @@ body {
     display: flex;
     flex-flow: column;
 
-    @media (min-width: 1281px) {
+    @media (min-width: $breakpoint) {
       top: 0;
       pointer-events: auto;
       transform: translate3d(0, 0, 0);
@@ -128,7 +129,7 @@ body {
   }
 
   .md-backdrop {
-    @media (min-width: 1281px) {
+    @media (min-width: $breakpoint) {
       opacity: 0;
       pointer-events: none;
     }
@@ -166,13 +167,28 @@ body {
   padding: 16px;
   flex: 1;
   overflow: auto;
-  transform: translate3d(0, 0, 0);
 }
 
 .page-content {
   flex: 1;
   display: flex;
   flex-flow: column;
+}
+
+.has-fixed-header {
+  .main-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+
+    @media (min-width: $breakpoint) {
+      left: $sidebar-size;
+    }
+  }
+  .main-content {
+    transform: translate3d(0, 64px, 0);
+  }
 }
 
 .main-header {
@@ -183,7 +199,7 @@ body {
     color: #fff !important;
 
     .nav-trigger {
-      @media (min-width: 1281px) {
+      @media (min-width: $breakpoint) {
         display: none;
       }
     }
@@ -191,7 +207,7 @@ body {
     .md-title {
       flex: 1;
 
-      @media (min-width: 1281px) {
+      @media (min-width: $breakpoint) {
         margin-left: 8px;
       }
     }
