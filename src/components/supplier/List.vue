@@ -1,9 +1,9 @@
 <template>
   <div>
     <md-card>
-      <md-toolbar class="md-dense" v-md-theme="'white'">
+      <!--md-toolbar class="md-dense" v-md-theme="'white'">
         <h1 class="md-title">Proveedores</h1>
-      </md-toolbar>
+      </md-toolbar-->
 
       <md-card-area>
         <md-table>
@@ -41,6 +41,7 @@ export default {
   },
 
   created() {
+    this.$parent.setTitle('Proveedores')
     this.fetchData()
   },
 
