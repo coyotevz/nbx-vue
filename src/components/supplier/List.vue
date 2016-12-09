@@ -1,10 +1,6 @@
 <template>
   <div>
     <md-card>
-      <!--md-toolbar class="md-dense" v-md-theme="'white'">
-        <h1 class="md-title">Proveedores</h1>
-      </md-toolbar-->
-
       <md-card-area>
         <md-table>
           <md-table-header>
@@ -18,7 +14,9 @@
 
           <md-table-body>
             <md-table-row v-for="supplier in suppliers">
-              <md-table-cell>{{ supplier.rz }}</md-table-cell>
+              <md-table-cell>
+                <router-link :to="{ name: 'suppliers:detail', params: { 'id': supplier.$id } }">{{ supplier.rz }}</router-link>
+              </md-table-cell>
               <md-table-cell>{{ supplier.expiration_date | date }}</md-table-cell>
               <md-table-cell>{{ supplier.expired }}</md-table-cell>
               <md-table-cell>{{ supplier.debt }}</md-table-cell>

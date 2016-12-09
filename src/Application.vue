@@ -8,7 +8,9 @@
       <div class="main-sidebar-links">
         <md-list class="md-dense">
           <md-list-item>
-            <span>Item 1</span>
+            <router-link exact :to="{ name: 'suppliers:list' }">
+              Proveedores
+            </router-link>
           </md-list-item>
           <md-list-item>
             <span>Item 2</span>
@@ -173,22 +175,7 @@ body {
   flex: 1;
   display: flex;
   flex-flow: column;
-}
-
-.has-fixed-header {
-  .main-header {
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-
-    @media (min-width: $breakpoint) {
-      left: $sidebar-size;
-    }
-  }
-  .main-content {
-    transform: translate3d(0, 64px, 0);
-  }
+  max-height: 100vh;
 }
 
 .main-header {
