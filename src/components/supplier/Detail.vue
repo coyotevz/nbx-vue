@@ -16,6 +16,14 @@ export default {
     this.fetchData()
   },
 
+  watch: {
+    '$route'(to, from) {
+      if (from.params.id !== to.params.id) {
+        this.fetchData()
+      }
+    }
+  },
+
   methods: {
     fetchData() {
       this.$http.get('suppliers/' + this.$route.params.id).then(response => {

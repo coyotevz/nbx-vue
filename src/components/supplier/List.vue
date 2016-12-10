@@ -7,19 +7,19 @@
             <md-table-row>
               <md-table-head>Nombre</md-table-head>
               <md-table-head>Vencimiento</md-table-head>
-              <md-table-head>Vencido ($)</md-table-head>
-              <md-table-head>Adeudado ($)</md-table-head>
+              <md-table-head md-numeric>Vencido ($)</md-table-head>
+              <md-table-head md-numeric>Adeudado ($)</md-table-head>
             </md-table-row>
           </md-table-header>
 
           <md-table-body>
             <md-table-row v-for="supplier in suppliers">
               <md-table-cell>
-                <router-link :to="{ name: 'suppliers:detail', params: { 'id': supplier.$id } }">{{ supplier.rz }}</router-link>
+                <router-link :to="{ name: 'suppliers:detail', params: { 'id': supplier.$id } }"><strong>{{ supplier.rz }}<strong>{{ supplier.name }}</router-link>
               </md-table-cell>
               <md-table-cell>{{ supplier.expiration_date | date }}</md-table-cell>
-              <md-table-cell>{{ supplier.expired }}</md-table-cell>
-              <md-table-cell>{{ supplier.debt }}</md-table-cell>
+              <md-table-cell md-numeric>{{ supplier.expired | money }}</md-table-cell>
+              <md-table-cell md-numeric>{{ supplier.debt | money }}</md-table-cell>
             </md-table-row>
           </md-table-body>
         </md-table>
