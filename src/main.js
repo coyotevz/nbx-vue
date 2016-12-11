@@ -41,8 +41,19 @@ const currencyOptions = {
   }
 }
 
+const numberOptions = {
+  decimal: ',',
+  thousand: '.',
+  precision: 2,
+}
+
 Vue.filter('money', value => {
   if (!isNaN(value)) return accounting.formatMoney(value, currencyOptions)
+  return value
+})
+
+Vue.filter('number', value => {
+  if (!isNaN(value)) return accounting.formatNumber(value, numberOptions)
   return value
 })
 

@@ -1,5 +1,80 @@
 <template>
-  <div>Supplier detail for {{ supplier.rz }}</div>
+  <div class="supplier-detail">
+    <div class="row">
+      <md-card class="general-data">
+        <md-toolbar class="md-dense" v-md-theme="'white'">
+          <h2 class="md-title">{{ supplier.rz }}</h2>
+        </md-toolbar>
+        <md-card-area>
+          <md-tabs md-right :md-dynamic-height="false" class="md-transparent">
+            <md-tab class="example-content" md-label="Datos">
+              <div>Data tab content</div>
+            </md-tab>
+            <md-tab class="code-content" md-label="Contactos">
+              <div>Contacts tab content</div>
+            </md-tab>
+            <md-tab class="notes-content" md-label="Notas">
+              <div>Notes tab content</div>
+            </md-tab>
+          </md-tabs>
+        </md-card-area>
+      </md-card>
+    </div>
+
+    <div class="row">
+      <md-table-card class="invoices">
+        <md-toolbar>
+          <h1 class="md-title">Facturas</h1>
+          <md-button class="md-icon-button">
+            <md-icon>filter_list</md-icon>
+          </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>search</md-icon>
+          </md-button>
+        </md-toolbar>
+
+        <md-table>
+          <md-table-header>
+            <md-table-row>
+              <md-table-head>Fecha</md-table-head>
+              <md-table-head>Documento</md-table-head>
+              <md-table-head md-numeric>Total ($)</md-table-head>
+            </md-table-row>
+          </md-table-header>
+          <md-table-body>
+            <md-table-row v-for="invoice in invoices">
+              <md-table-cell>{{ invoice.issue_date | date }}</md-table-cell>
+              <md-table-cell>{{ invoice.full_desc }}</md-table-cell>
+              <md-table-cell md-numeric>{{ invoice.total | number }}</md-table-cell>
+            </md-table-row>
+          </md-table-body>
+        </md-table>
+      </md-table-card>
+
+      <md-table-card class="orders">
+        <md-toolbar>
+          <h1 class="md-title">Pedidos</h1>
+          <md-button class="md-icon-button">
+            <md-icon>filter_list</md-icon>
+          </md-button>
+          <md-button class="md-icon-button">
+            <md-icon>search</md-icon>
+          </md-button>
+        </md-toolbar>
+
+        <md-table>
+          <md-table-header>
+            <md-table-row>
+              <md-table-head>Fecha</md-table-head>
+              <md-table-head>Número</md-table-head>
+              <md-table-head>Estado</md-table-head>
+            </md-table-row>
+          </md-table-header>
+        </md-table>
+      </md-table-card>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -8,7 +83,8 @@ export default {
 
   data() {
     return {
-      supplier: {}
+      supplier: {},
+      invoices: [],
     }
   },
   created() {
@@ -26,12 +102,56 @@ export default {
 
   methods: {
     fetchData() {
-      this.$http.get('suppliers/' + this.$route.params.id).then(response => {
+      const sid = this.$route.params.id
+      const docOptions = {
+        params: {
+          where: '{"supplier":' + sid + '}',
+          sort: JSON.stringify({ 'issue_date': true }),
+          per_page: 5,
+        }
+      }
+      this.$http.get('suppliers/' + sid).then(response => {
         this.supplier = response.data
       }, response => {
         console.error('>> error')
+      })
+      this.$http.get('documents', docOptions).then(response => {
+        this.invoices = response.data
+      }, response => {
+        console.log('>> error')
       })
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.md-tabs {
+  margin-top: -48px;
+}
+
+.md-card {
+  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+}
+
+.general-data {
+  flex: 1 1 100%;
+}
+
+.invoices,
+.orders {
+  flex: 1 1 50%;
+}
+
+.invoices {
+  margin-right: 8px;
+}
+
+.orders {
+  margin-left: 8px;
+}
+</style>
