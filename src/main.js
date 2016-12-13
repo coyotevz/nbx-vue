@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Resource from 'vue-resource'
+import Potion from 'vue-potion'
 import Material from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import dateFns from 'date-fns'
@@ -14,6 +15,7 @@ import themes from './themes'
 
 Vue.use(Router)
 Vue.use(Resource)
+Vue.use(Potion)
 Vue.use(Material)
 
 Vue.http.options.root = 'http://localhost:5000/api'
