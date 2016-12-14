@@ -55,6 +55,14 @@
             </md-table-row>
           </md-table-body>
         </md-table>
+        <md-table-pagination
+          md-size="5"
+          md-total="10"
+          md-page="1"
+          md-label="Rows"
+          md-separator="of"
+          :md-page-options="false"
+          @pagination="onPagination"></md-table-pagination>
       </md-table-card>
 
       <md-table-card class="orders">
@@ -109,6 +117,9 @@ export default {
   },
 
   methods: {
+    onPagination(ev) {
+      console.log('onPagination:', ev)
+    },
     fetchData() {
       this.error = this.supplier = null
       this.loading = true

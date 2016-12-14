@@ -5,7 +5,7 @@
     </div>
     <md-card v-if="suppliers">
       <md-card-area>
-        <md-table md-sort="rz" @sort="tableSort = $event">
+        <md-table md-sort="rz" md-sort-type="desc" @sort="onSort">
           <md-table-header>
             <md-table-row>
               <md-table-head md-sort-by="rz">Nombre</md-table-head>
@@ -26,7 +26,15 @@
             </md-table-row>
           </md-table-body>
         </md-table>
-      </md-card-area>
+        <!--md-table-pagination
+          md-size="5"
+          md-total="10"
+          md-page="1"
+          md-label="Rows"
+          md-separator="of"
+          :md-page-options="[5, 10, 25, 50]"
+          @pagination="onPagination"></md-table-pagination>
+      </md-card-area-->
     </md-card>
   </div>
 </template>
@@ -56,6 +64,12 @@ export default {
   },
 
   methods: {
+    onSort(ev) {
+      console.log('onSort:', ev)
+    },
+    onPagination(ev) {
+      console.log('onPagination:', ev)
+    },
     fetchData() {
       this.loading = true
       let sort = {}
@@ -65,6 +79,7 @@ export default {
         sort: JSON.stringify(sort),
         per_page: 10,
       }
+
       this.$http.get('suppliers', { params: params }).then(response => {
         this.suppliers = response.data
         this.loading = false
@@ -75,3 +90,8 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.md-table-card {
+}
+</style>
