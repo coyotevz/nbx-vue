@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Resource from 'vue-resource'
-import Potion from 'vue-potion'
 import Material from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 
@@ -15,7 +14,6 @@ import Filters from './filters'
 
 Vue.use(Router)
 Vue.use(Resource)
-Vue.use(Potion)
 Vue.use(Material)
 
 Vue.use(Filters)
@@ -28,9 +26,8 @@ const router = new Router({
   routes
 })
 
-window.Vue = Vue
 /* eslint-disable no-new */
-window.$vm = new Vue({
+new Vue({
   el: '#application',
   template: '<application/>',
   components: { Application },
