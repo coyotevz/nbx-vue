@@ -1,7 +1,13 @@
 <template>
   <div class="supplier-detail">
     <div class="row">
-      <md-card class="general-data">
+      <div class="loading" v-if="loading">
+        Loading ...
+      </div>
+      <div class="error" v-if="error">
+        {{ error }}
+      </div>
+      <md-card class="general-data" v-if="supplier">
         <md-toolbar class="md-dense" v-md-theme="'white'">
           <h2 class="md-title">{{ supplier.rz }}</h2>
         </md-toolbar>
@@ -83,8 +89,10 @@ export default {
 
   data() {
     return {
-      supplier: {},
       invoices: [],
+      loading: false,
+      error: null,
+      supplier: null,
     }
   },
   created() {
@@ -102,6 +110,8 @@ export default {
 
   methods: {
     fetchData() {
+      this.error = this.supplier = null
+      this.loading = true
       const sid = this.$route.params.id
       const docOptions = {
         params: {
@@ -111,8 +121,11 @@ export default {
         }
       }
       this.$http.get('suppliers/' + sid).then(response => {
+        this.loading = false
         this.supplier = response.data
       }, response => {
+        this.loading = false
+        this.error = response
         console.error('>> error')
       })
       this.$http.get('documents', docOptions).then(response => {

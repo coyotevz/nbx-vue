@@ -1,14 +1,17 @@
 <template>
   <div>
-    <md-card>
+    <div class="loading" v-if="loading">
+      Loading ...
+    </div>
+    <md-card v-if="suppliers">
       <md-card-area>
-        <md-table>
+        <md-table md-sort="rz" @sort="tableSort = $event">
           <md-table-header>
             <md-table-row>
-              <md-table-head>Nombre</md-table-head>
-              <md-table-head>Vencimiento</md-table-head>
-              <md-table-head md-numeric>Vencido ($)</md-table-head>
-              <md-table-head md-numeric>Adeudado ($)</md-table-head>
+              <md-table-head md-sort-by="rz">Nombre</md-table-head>
+              <md-table-head md-sort-by="expiration_date">Vencimiento</md-table-head>
+              <md-table-head md-sort-by="expired" md-numeric>Vencido ($)</md-table-head>
+              <md-table-head md-sort-by="debt" md-numeric>Adeudado ($)</md-table-head>
             </md-table-row>
           </md-table-header>
 
@@ -35,6 +38,11 @@ export default {
   data() {
     return {
       suppliers: [],
+      loading: false,
+      tableSort: {
+        name: 'rz',
+        type: 'asc',
+      }
     }
   },
 
@@ -43,10 +51,23 @@ export default {
     this.fetchData()
   },
 
+  watch: {
+    'tableSort': 'fetchData',
+  },
+
   methods: {
     fetchData() {
-      this.$http.get('suppliers').then(response => {
+      this.loading = true
+      let sort = {}
+      sort[this.tableSort.name] = this.tableSort.type === 'desc'
+
+      const params = {
+        sort: JSON.stringify(sort),
+        per_page: 10,
+      }
+      this.$http.get('suppliers', { params: params }).then(response => {
         this.suppliers = response.data
+        this.loading = false
       }, response => {
         console.error('>> error')
       })
