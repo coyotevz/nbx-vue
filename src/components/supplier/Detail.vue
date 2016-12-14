@@ -28,7 +28,7 @@
     </div>
 
     <div class="row">
-      <md-table-card class="invoices">
+      <md-table-card class="invoices" ref="invoicesTable">
         <md-toolbar>
           <h1 class="md-title">Facturas</h1>
           <md-button class="md-icon-button">
@@ -55,17 +55,26 @@
             </md-table-row>
           </md-table-body>
         </md-table>
-        <md-table-pagination
+        <!--md-table-pagination
           md-size="5"
-          md-total="10"
-          md-page="1"
-          md-label="Rows"
-          md-separator="of"
+          :md-page="1"
+          :md-total="100"
+          md-label=""
+          md-separator="de"
           :md-page-options="false"
-          @pagination="onPagination"></md-table-pagination>
+          @pagination="onPagination"></md-table-pagination-->
+      <nbx-table-pagination
+        nbx-size="5"
+        nbx-page="1"
+        nbx-total="100"
+        nbx-label=""
+        nbx-separator="de"
+        :nbx-page-options="false"
+        @pagination="onPagination"></nbx-table-pagination>
+
       </md-table-card>
 
-      <md-table-card class="orders">
+      <md-table-card class="orders" ref="ordersTable">
         <md-toolbar>
           <h1 class="md-title">Pedidos</h1>
           <md-button class="md-icon-button">
@@ -92,6 +101,7 @@
 </template>
 
 <script>
+import NbxTablePagination from '../../ui/nbxTablePagination'
 export default {
   name: 'supplier-list',
 
@@ -145,6 +155,10 @@ export default {
         console.log('>> error')
       })
     }
+  },
+
+  components: {
+    NbxTablePagination
   }
 }
 </script>
