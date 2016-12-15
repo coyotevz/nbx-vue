@@ -55,22 +55,17 @@
             </md-table-row>
           </md-table-body>
         </md-table>
-        <!--md-table-pagination
-          md-size="5"
-          :md-page="1"
-          :md-total="100"
-          md-label=""
-          md-separator="de"
-          :md-page-options="false"
-          @pagination="onPagination"></md-table-pagination-->
-      <nbx-table-pagination
-        nbx-size="5"
-        nbx-page="1"
-        nbx-total="100"
-        nbx-label=""
-        nbx-separator="de"
-        :nbx-page-options="false"
-        @pagination="onPagination"></nbx-table-pagination>
+        <nbx-table-pagination
+          nbx-size="5"
+          :nbx-page="invoicesTable.page"
+          :nbx-total="invoicesTable.total"
+          nbx-label="Mostrando"
+          nbx-separator="de"
+          :nbx-page-options="false"
+          @pagination="onInvoicesPagination"></nbx-table-pagination>
+        <div>
+          page: {{ invoicesTable.page }}, total: {{ invoicesTable.total }}
+        </div>
 
       </md-table-card>
 
@@ -107,10 +102,14 @@ export default {
 
   data() {
     return {
-      invoices: [],
       loading: false,
       error: null,
       supplier: null,
+      invoices: [],
+      invoicesTable: {
+        total: 30,
+        page: 1,
+      }
     }
   },
   created() {
@@ -127,9 +126,13 @@ export default {
   },
 
   methods: {
-    onPagination(ev) {
+
+    onInvoicesPagination(ev) {
+      this.invoicesTable.page = ev.page
+      this.fetchData()
       console.log('onPagination:', ev)
     },
+
     fetchData() {
       this.error = this.supplier = null
       this.loading = true
@@ -139,8 +142,10 @@ export default {
           where: '{"supplier":' + sid + '}',
           sort: JSON.stringify({ 'issue_date': true }),
           per_page: 5,
+          page: this.invoicesTable.page,
         }
       }
+
       this.$http.get('suppliers/' + sid).then(response => {
         this.loading = false
         this.supplier = response.data
@@ -149,8 +154,12 @@ export default {
         this.error = response
         console.error('>> error')
       })
+
+      // TODO separate this into defferents calls
       this.$http.get('documents', docOptions).then(response => {
         this.invoices = response.data
+        console.log('total count:', response.headers.get('X-Total-Count'))
+        window.response = response
       }, response => {
         console.log('>> error')
       })
