@@ -25,7 +25,7 @@ export default function filters(Vue) {
   }
 
   Vue.filter('date', value => {
-    if (value && value.$date) return dateFns.format(value.$date, 'D/MM/YYYY')
+    if (value && value.$date) return dateFns.format(value.$date, 'DD/MM/YYYY')
     return value
   })
 

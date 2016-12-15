@@ -18,7 +18,8 @@ Vue.use(Material)
 Vue.use(Filters)
 
 Vue.prototype.$http = axios.create({
-  baseURL: 'http://localhost:5000/api'
+  baseURL: 'http://localhost:5000/api',
+  withCredentials: true,
 })
 
 Vue.material.theme.registerAll(themes)

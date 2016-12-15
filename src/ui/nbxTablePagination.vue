@@ -24,10 +24,17 @@
 export default {
   data() {
     return {
-      subTotal: 0,
       currentSize: parseInt(this.nbxSize, 10),
       currentPage: parseInt(this.nbxPage, 10),
-      totalItems: !isNaN(this.nbxTotal) ? this.nbxTotal : Number.MAX_SAFE_INTEGER,
+    }
+  },
+  computed: {
+    totalItems() {
+      return !isNaN(this.nbxTotal) ? this.nbxTotal : Number.MAX_SAFE_INTEGER
+    },
+    subTotal() {
+      const sub = this.currentPage * this.currentSize
+      return sub > this.totalItems ? this.totalItems : sub
     }
   },
   props: {
@@ -61,8 +68,6 @@ export default {
   methods: {
     emitPaginationEvent() {
       if (this.canFireEvents) {
-        const sub = this.currentPage * this.currentSize
-        this.subTotal = sub > this.nbxTotal ? this.nbxTotal : sub
         this.$emit('pagination', {
           size: this.currentSize,
           page: this.currentPage,
@@ -92,7 +97,6 @@ export default {
   },
   mounted() {
     this.$nextTick(function() {
-      this.subTotal = this.currentPage * this.currentSize
       if (this.nbxPageOptions) {
         if (!this.nbxPageOptions.includes(this.currentSize)) {
           console.error('[VueMaterial warn]: nbxPageOptions dont\'t match with currentSize')
