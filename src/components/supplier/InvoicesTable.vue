@@ -21,7 +21,7 @@
       <md-table-body>
         <md-table-row v-for="invoice in invoices">
           <md-table-cell>{{ invoice.issue_date | date }}</md-table-cell>
-          <md-table-cell>{{ invoice.full_desc }}</md-table-cell>
+          <md-table-cell>{{ desc(invoice) }}</md-table-cell>
           <md-table-cell md-numeric>{{ invoice.total | number }}</md-table-cell>
         </md-table-row>
       </md-table-body>
@@ -38,7 +38,14 @@
 </template>
 
 <script>
-import NbxTablePagination from '../../ui/nbxTablePagination'
+import NbxTablePagination from 'ui/nbxTablePagination'
+import { paddingLeft } from 'lib/utils'
+
+const docTypesShort = {
+  'TYPE_FACTURA_A': 'FAC',
+  'TYPE_NOTA_CREDITO_A': 'NC ',
+  'TYPE_PRESUPUESTO': 'PRE',
+}
 
 export default {
   name: 'invoices-table',
@@ -78,12 +85,18 @@ export default {
 
       this.$http.get('documents', options).then(response => {
         this.loading = false
+        this.error = null
         this.invoices = response.data
         this.tableOptions.total = parseInt(response.headers['x-total-count'], 10)
       }).catch(error => {
         this.loading = false
         this.error = error
       })
+    },
+    desc(invoice) {
+      return docTypesShort[invoice.doc_type] + ' ' +
+        paddingLeft('0000', invoice.point_sale) + '-' +
+        paddingLeft('0000000', invoice.number)
     }
   },
   components: {
