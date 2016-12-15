@@ -129,24 +129,15 @@ export default {
 
     onInvoicesPagination(ev) {
       this.invoicesTable.page = ev.page
-      this.fetchData()
-      console.log('onPagination:', ev)
+      this.fetchInvoices()
     },
 
-    fetchData() {
+    fetchSupplier() {
       this.error = this.supplier = null
       this.loading = true
-      const sid = this.$route.params.id
-      const docOptions = {
-        params: {
-          where: '{"supplier":' + sid + '}',
-          sort: JSON.stringify({ 'issue_date': true }),
-          per_page: 5,
-          page: this.invoicesTable.page,
-        }
-      }
+      let id = this.$route.params.id
 
-      this.$http.get('suppliers/' + sid).then(response => {
+      this.$http.get('suppliers/' + id).then(response => {
         this.loading = false
         this.supplier = response.data
       }, response => {
@@ -154,8 +145,18 @@ export default {
         this.error = response
         console.error('>> error')
       })
+    },
 
-      // TODO separate this into defferents calls
+    fetchInvoices() {
+      const docOptions = {
+        params: {
+          where: '{"supplier":' + this.$route.params.id + '}',
+          sort: JSON.stringify({ 'issue_date': true }),
+          per_page: 5,
+          page: this.invoicesTable.page,
+        }
+      }
+
       this.$http.get('documents', docOptions).then(response => {
         this.invoices = response.data
         console.log('total count:', response.headers.get('X-Total-Count'))
@@ -163,6 +164,11 @@ export default {
       }, response => {
         console.log('>> error')
       })
+    },
+
+    fetchData() {
+      this.fetchSupplier()
+      this.fetchInvoices()
     }
   },
 
