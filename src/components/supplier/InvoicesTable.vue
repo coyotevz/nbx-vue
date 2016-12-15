@@ -21,7 +21,7 @@
       <md-table-body>
         <md-table-row v-for="invoice in invoices">
           <md-table-cell>{{ invoice.issue_date | date }}</md-table-cell>
-          <md-table-cell>{{ desc(invoice) }}</md-table-cell>
+          <md-table-cell>{{ desc(invoice) }}, {{ statusIcon(invoice) }}</md-table-cell>
           <md-table-cell md-numeric>{{ invoice.total | number }}</md-table-cell>
         </md-table-row>
       </md-table-body>
@@ -45,6 +45,12 @@ const docTypesShort = {
   'TYPE_FACTURA_A': 'FAC',
   'TYPE_NOTA_CREDITO_A': 'NC ',
   'TYPE_PRESUPUESTO': 'PRE',
+}
+
+const docStatusIcons = {
+  'STATUS_PENDING': 'a',
+  'STATUS_EXPIRED': 'e',
+  'STATUS_PAID': 'p',
 }
 
 export default {
@@ -97,6 +103,9 @@ export default {
       return docTypesShort[invoice.doc_type] + ' ' +
         paddingLeft('0000', invoice.point_sale) + '-' +
         paddingLeft('0000000', invoice.number)
+    },
+    statusIcon(invoice) {
+      return docStatusIcons[invoice.doc_status]
     }
   },
   components: {
