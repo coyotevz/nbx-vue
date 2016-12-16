@@ -19,7 +19,7 @@
         </md-table-row>
       </md-table-header>
       <md-table-body>
-        <md-table-row v-for="invoice in invoices">
+        <md-table-row v-for="invoice in invoices" :class="statusRowBg(invoice)">
           <md-table-cell>{{ invoice.issue_date | date }}</md-table-cell>
           <md-table-cell class="invoice-status">
             <span>{{ desc(invoice) }}</span>
@@ -113,6 +113,14 @@ export default {
     statusIcon(invoice) {
       return statusShowIcon.includes(invoice.doc_status)
     },
+    statusRowBg(invoice) {
+      if (invoice.doc_status === 'STATUS_EXPIRED') {
+        return 'bg-status-warning'
+      } else if (invoice.doc_status === 'STATUS_PENDING') {
+        return 'bg-status-atention'
+      }
+      return ''
+    },
     statusIconClass(invoice) {
       return invoice.doc_status === 'STATUS_EXPIRED' ? 'md-accent' : ''
     },
@@ -133,10 +141,13 @@ export default {
 
 <style lang="scss">
 .md-table {
+  .md-table-row {
+    &.bg-status-atention { background-color: #ddd; }
+    &.bg-status-warning { background-color: rgba(244,67,54,0.12); }
+  }
   .md-table-cell {
     font-size: inherit;
   }
-
   .invoice-status {
     .md-icon {
       width: 20px;

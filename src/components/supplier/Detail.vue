@@ -9,7 +9,8 @@
       </div>
       <md-card class="general-data" v-if="supplier">
         <md-toolbar class="md-dense" v-md-theme="'white'">
-          <h2 class="md-title">{{ supplier.rz }}</h2>
+          <h2 class="md-title" @mouseenter="onMouseEvent"
+            @mouseleave="onMouseEvent">{{ supplier.rz }}</h2>
         </md-toolbar>
         <md-card-area>
           <md-tabs md-right :md-dynamic-height="false" class="md-transparent">
@@ -73,6 +74,9 @@ export default {
         this.loading = false
         this.error = error
       })
+    },
+    onMouseEvent(ev) {
+      console.log('on mouse over:', ev)
     }
   },
   components: {
