@@ -1,7 +1,7 @@
 <template>
-  <div id="application" class="container" v-md-theme="'default'">
+  <div id="application" class="container" md-theme="'default'">
     <md-sidenav :visible="true" class="main-sidebar md-left md-fixed" ref="main-sidebar">
-      <md-toolbar class="nbx-logo" v-md-theme="'white'">
+      <md-toolbar class="nbx-logo" md-theme="white">
         <span>NBX app</span>
       </md-toolbar>
 
@@ -66,7 +66,6 @@ export default {
   data() {
     return {
       toolbar: true,
-      theme: 'default',
       pageTitle: 'Title'
     }
   },

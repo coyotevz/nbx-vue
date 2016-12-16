@@ -8,7 +8,7 @@
         {{ error }}
       </div>
       <md-card class="general-data" v-if="supplier">
-        <md-toolbar class="md-dense" v-md-theme="'white'">
+        <md-toolbar class="md-dense" md-theme="white">
           <h2 class="md-title" @mouseenter="onMouseEvent"
             @mouseleave="onMouseEvent">{{ supplier.rz }}</h2>
         </md-toolbar>

@@ -22,7 +22,10 @@ Vue.prototype.$http = axios.create({
   withCredentials: true,
 })
 
-Vue.material.theme.registerAll(themes)
+Vue.material.registerTheme(themes)
+Vue.material.setCurrentTheme('default')
+
+window.Vue = Vue
 
 const router = new Router({
   routes
