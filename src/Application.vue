@@ -47,7 +47,7 @@
           <div class="md-title">{{ pageTitle }}</div>
 
           <md-button class="md-icon-button">
-            <md-icon>more_vert</md-icon>
+            <md-icon>account_circle</md-icon>
           </md-button>
         </md-toolbar>
       </md-whiteframe>

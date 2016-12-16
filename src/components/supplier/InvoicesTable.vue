@@ -21,7 +21,13 @@
       <md-table-body>
         <md-table-row v-for="invoice in invoices">
           <md-table-cell>{{ invoice.issue_date | date }}</md-table-cell>
-          <md-table-cell>{{ desc(invoice) }}, {{ statusIcon(invoice) }}</md-table-cell>
+          <md-table-cell class="invoice-status">
+            <span>{{ desc(invoice) }}</span>
+            <div v-if="statusIcon(invoice)">
+              <md-icon :class="statusIconClass(invoice)">money_off</md-icon>
+              <md-tooltip md-direction="top">{{ statusIconTooltip(invoice) }}</md-tooltip>
+            </div>
+          </md-table-cell>
           <md-table-cell md-numeric>{{ invoice.total | number }}</md-table-cell>
         </md-table-row>
       </md-table-body>
@@ -39,6 +45,7 @@
 
 <script>
 import NbxTablePagination from 'ui/nbxTablePagination'
+import dateFns from 'date-fns'
 import { paddingLeft } from 'lib/utils'
 
 const docTypesShort = {
@@ -47,11 +54,10 @@ const docTypesShort = {
   'TYPE_PRESUPUESTO': 'PRE',
 }
 
-const docStatusIcons = {
-  'STATUS_PENDING': 'a',
-  'STATUS_EXPIRED': 'e',
-  'STATUS_PAID': 'p',
-}
+const statusShowIcon = [
+  'STATUS_PENDING',
+  'STATUS_EXPIRED'
+]
 
 export default {
   name: 'invoices-table',
@@ -105,11 +111,41 @@ export default {
         paddingLeft('0000000', invoice.number)
     },
     statusIcon(invoice) {
-      return docStatusIcons[invoice.doc_status]
-    }
+      return statusShowIcon.includes(invoice.doc_status)
+    },
+    statusIconClass(invoice) {
+      return invoice.doc_status === 'STATUS_EXPIRED' ? 'md-accent' : ''
+    },
+    statusIconTooltip(invoice) {
+      if (invoice.doc_status === 'STATUS_EXPIRED') {
+        return 'Vencida desde el ' + dateFns.format(invoice.expiration_date.$date, 'DD/MM/YYYY')
+      } else if (invoice.doc_status === 'STATUS_PENDING') {
+        return 'Vence el ' + dateFns.format(invoice.expiration_date.$date, 'DD/MM/YYYY')
+      }
+      return 'No vencida'
+    },
   },
   components: {
     NbxTablePagination,
   },
 }
 </script>
+
+<style lang="scss">
+.md-table {
+  .md-table-cell {
+    font-size: inherit;
+  }
+
+  .invoice-status {
+    .md-icon {
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      min-height: 20px;
+      font-size: 18px;
+      margin: initial;
+    }
+  }
+}
+</style>
