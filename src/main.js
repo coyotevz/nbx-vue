@@ -31,10 +31,22 @@ const router = new Router({
   routes
 })
 
-/* eslint-disable no-new */
-new Vue({
+router.beforeEach((to, from, next) => {
+  Vue.nextTick(() => {
+    let mainContent = document.querySelector('.main-content')
+
+    if (mainContent) {
+      mainContent.scrollTop = 0
+    }
+
+    app.closeSidenav()
+    next()
+  })
+})
+
+let App = Vue.component('app', Application)
+
+let app = new App({
   el: '#application',
-  template: '<application/>',
-  components: { Application },
   router,
 })
