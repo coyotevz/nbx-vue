@@ -8,28 +8,35 @@
       <div class="main-sidebar-links">
         <md-list class="md-dense">
           <md-list-item>
-            <router-link exact :to="{ name: 'suppliers:list' }">
-              Proveedores
-            </router-link>
-          </md-list-item>
-          <md-list-item>
-            <span>Item 2</span>
+            <span>Tablero</span>
           </md-list-item>
           <md-list-item>
             <span>Compras</span>
             <md-list-expand>
               <md-list>
                 <md-list-item class="md-inset">
-                  <span>Sub item 1</span>
+                  <router-link exact :to="{ name: 'suppliers:list' }">
+                    Proveedores
+                  </router-link>
                 </md-list-item>
                 <md-list-item class="md-inset">
-                  <span>Sub item 2</span>
+                  <span>Facturas</span>
+                </md-list-item>
+                <md-list-item class="md-inset">
+                  <span>Pedidos</span>
+                </md-list-item>
+                <md-list-item class="md-inset">
+                  <span>Contactos</span>
                 </md-list-item>
               </md-list>
             </md-list-expand>
           </md-list-item>
+
           <md-list-item>
             <span>Ventas</span>
+          </md-list-item>
+          <md-list-item>
+            <span>Cuentas</span>
           </md-list-item>
           <md-list-item>
             <span>Acerca de</span>
