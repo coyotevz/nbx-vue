@@ -7,8 +7,8 @@
 
       <div class="main-sidebar-links">
         <md-list class="md-dense">
-          <md-list-item disabled>
-            <span>Tablero</span>
+          <md-list-item>
+            <router-link exact :to="{name: 'dashboard' }">Tablero</router-link>
           </md-list-item>
           <md-list-item>
             <span>Compras</span>
@@ -99,7 +99,6 @@ export default {
 <style lang="scss">
 @import '~vue-material/src/core/stylesheets/variables.scss';
 $sidebar-size: 280px;
-$breakpoint: 1281px;
 
 html,
 body {
@@ -117,7 +116,7 @@ body {
   flex: 1;
   transition: $swift-ease-out;
 
-  @media (min-width: $breakpoint) {
+  @media (min-width: $breakpoint-medium) {
     padding-left: $sidebar-size;
   }
 }
@@ -128,7 +127,7 @@ body {
     display: flex;
     flex-flow: column;
 
-    @media (min-width: $breakpoint) {
+    @media (min-width: $breakpoint-medium) {
       top: 0;
       pointer-events: auto;
       transform: translate3d(0, 0, 0);
@@ -137,7 +136,7 @@ body {
   }
 
   .md-backdrop {
-    @media (min-width: $breakpoint) {
+    @media (min-width: $breakpoint-medium) {
       opacity: 0;
       pointer-events: none;
     }
@@ -175,6 +174,14 @@ body {
   padding: 16px;
   flex: 1;
   overflow: auto;
+  background-color: #eee;
+
+  @media (max-width: $breakpoint-small) {
+    padding: 8px;
+  }
+  @media (max-width: $breakpoint-xsmall) {
+    padding: 0;
+  }
 }
 
 .page-content {
@@ -192,7 +199,7 @@ body {
     color: #fff !important;
 
     .nav-trigger {
-      @media (min-width: $breakpoint) {
+      @media (min-width: $breakpoint-medium) {
         display: none;
       }
     }
@@ -200,7 +207,7 @@ body {
     .md-title {
       flex: 1;
 
-      @media (min-width: $breakpoint) {
+      @media (min-width: $breakpoint-medium) {
         margin-left: 8px;
       }
     }
