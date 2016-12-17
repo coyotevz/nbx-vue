@@ -7,7 +7,7 @@
 
       <div class="main-sidebar-links">
         <md-list class="md-dense">
-          <md-list-item>
+          <md-list-item disabled>
             <span>Tablero</span>
           </md-list-item>
           <md-list-item>
@@ -19,26 +19,26 @@
                     Proveedores
                   </router-link>
                 </md-list-item>
-                <md-list-item class="md-inset">
+                <md-list-item class="md-inset" disabled>
                   <span>Facturas</span>
                 </md-list-item>
-                <md-list-item class="md-inset">
+                <md-list-item class="md-inset" disabled>
                   <span>Pedidos</span>
                 </md-list-item>
-                <md-list-item class="md-inset">
+                <md-list-item class="md-inset" disabled>
                   <span>Contactos</span>
                 </md-list-item>
               </md-list>
             </md-list-expand>
           </md-list-item>
 
-          <md-list-item>
+          <md-list-item disabled>
             <span>Ventas</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item disabled>
             <span>Cuentas</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item disabled>
             <span>Acerca de</span>
           </md-list-item>
         </md-list>
