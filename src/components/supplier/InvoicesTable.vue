@@ -21,7 +21,7 @@
       <md-table-body>
         <md-table-row v-for="invoice in invoices" :class="statusRowBg(invoice)">
           <md-table-cell>{{ invoice.issue_date | date }}</md-table-cell>
-          <md-table-cell class="invoice-status">
+          <md-table-cell class="invoice-status md-has-action">
             <span>{{ desc(invoice) }}</span>
             <div v-if="statusIcon(invoice)">
               <md-icon :class="statusIconClass(invoice)">money_off</md-icon>
