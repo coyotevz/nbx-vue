@@ -19,11 +19,15 @@
                     Proveedores
                   </router-link>
                 </md-list-item>
-                <md-list-item class="md-inset" disabled>
-                  <span>Facturas</span>
+                <md-list-item class="md-inset">
+                  <router-link exact :to="{ name: 'documents:list' }">
+                    Facturas
+                  </router-link>
                 </md-list-item>
-                <md-list-item class="md-inset" disabled>
-                  <span>Pedidos</span>
+                <md-list-item class="md-inset">
+                  <router-link exact :to="{ name: 'orders:list' }">
+                    Pedidos
+                  </router-link>
                 </md-list-item>
                 <md-list-item class="md-inset" disabled>
                   <span>Contactos</span>

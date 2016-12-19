@@ -22,7 +22,7 @@
         <md-table-row v-for="invoice in invoices" :class="statusRowBg(invoice)">
           <md-table-cell>{{ invoice.issue_date | date }}</md-table-cell>
           <md-table-cell class="invoice-status md-has-action">
-            <span>{{ desc(invoice) }}</span>
+            <span>{{ invoice.short_type }} {{ invoice.full_number }}</span>
             <div v-if="statusIcon(invoice)">
               <md-icon :class="statusIconClass(invoice)">money_off</md-icon>
               <md-tooltip md-direction="top">{{ statusIconTooltip(invoice) }}</md-tooltip>
@@ -46,13 +46,6 @@
 <script>
 import NbxTablePagination from 'ui/nbxTablePagination'
 import dateFns from 'date-fns'
-import { paddingLeft } from 'lib/utils'
-
-const docTypesShort = {
-  'TYPE_FACTURA_A': 'FAC',
-  'TYPE_NOTA_CREDITO_A': 'NC ',
-  'TYPE_PRESUPUESTO': 'PRE',
-}
 
 const statusShowIcon = [
   'STATUS_PENDING',
@@ -104,11 +97,6 @@ export default {
         this.loading = false
         this.error = error
       })
-    },
-    desc(invoice) {
-      return docTypesShort[invoice.doc_type] + ' ' +
-        paddingLeft('0000', invoice.point_sale) + '-' +
-        paddingLeft('0000000', invoice.number)
     },
     statusIcon(invoice) {
       return statusShowIcon.includes(invoice.doc_status)

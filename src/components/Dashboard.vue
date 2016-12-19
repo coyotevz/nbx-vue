@@ -97,6 +97,14 @@
   </md-layout>
 </template>
 
+<script>
+export default {
+  created() {
+    this.$root.setTitle('Tablero')
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 @import '~vue-material/src/core/stylesheets/variables.scss';
 .md-card {

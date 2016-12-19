@@ -59,7 +59,7 @@ export default {
     }
   },
   created() {
-    this.$parent.setTitle('Proveedores')
+    this.$root.setTitle('Proveedores')
     this.fetchData()
   },
   watch: {
