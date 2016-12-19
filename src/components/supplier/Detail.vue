@@ -2,8 +2,15 @@
   <div class="supplier-detail">
     <div class="row">
       <md-card class="general-data" v-if="supplier">
-        <md-toolbar class="md-dense" md-theme="blue-grey">
+        <md-toolbar class="md-dense" md-theme="blue-grey"
+          @mouseenter.native="showActions = true"
+          @mouseleave.native="showActions = false">
           <h2 class="md-title">{{ supplier.rz }}</h2>
+          <div class="supplier-actions" v-if="showActions">
+            <md-button class="md-icon-button">
+              <md-icon>edit</md-icon>
+            </md-button>
+          </div>
         </md-toolbar>
         <md-card-area>
           <md-tabs md-centered :md-dynamic-height="false" class="md-transparent">
@@ -40,6 +47,7 @@ export default {
       loading: false,
       error: null,
       supplier: null,
+      showActions: false,
     }
   },
   created() {
@@ -86,6 +94,12 @@ export default {
 
 .md-card {
   margin-bottom: 16px;
+
+  .md-toolbar {
+    .md-title {
+      flex: 1;
+    }
+  }
 }
 
 .row {
