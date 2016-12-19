@@ -14,14 +14,20 @@
         </md-toolbar>
         <md-card-area>
           <md-tabs md-centered :md-dynamic-height="false" class="md-transparent">
-            <md-tab class="example-content" md-label="Datos">
-              <div>Data tab content</div>
+            <md-tab class="notes-content" md-label="Notas" v-if="supplier.notes">
+              <div>{{ supplier.notes }}</div>
             </md-tab>
-            <md-tab class="code-content" md-label="Contactos">
+            <md-tab class="banks-content" md-label="Bancos">
+              <span>Bank data</span>
+            </md-tab>
+            <md-tab class="contacts-content" md-label="Contactos">
               <div>Contacts tab content</div>
             </md-tab>
-            <md-tab class="notes-content" md-label="Notas">
-              <div>Notes tab content</div>
+            <md-tab class="comercial-content" md-label="Acuerdos">
+              <span>Comercial agreetment data</span>
+            </md-tab>
+            <md-tab class="data-content" md-label="Datos" v-if="supplier.address.length">
+              <span><strong>Dirección</strong> {{ supplier.address[0].street }} {{ supplier.address[0].streetnumber }}</span>
             </md-tab>
           </md-tabs>
         </md-card-area>
