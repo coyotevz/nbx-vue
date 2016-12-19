@@ -1,6 +1,6 @@
 <template>
   <md-table-card class="invoices">
-    <md-toolbar>
+    <md-toolbar class="md-dense">
       <h1 class="md-title">Facturas</h1>
       <md-button class="md-icon-button">
         <md-icon>filter_list</md-icon>

@@ -1,19 +1,12 @@
 <template>
   <div class="supplier-detail">
     <div class="row">
-      <div class="loading" v-if="loading">
-        Loading ...
-      </div>
-      <div class="error" v-if="error">
-        {{ error }}
-      </div>
       <md-card class="general-data" v-if="supplier">
-        <md-toolbar class="md-dense" md-theme="white">
-          <h2 class="md-title" @mouseenter="onMouseEvent"
-            @mouseleave="onMouseEvent">{{ supplier.rz }}</h2>
+        <md-toolbar class="md-dense" md-theme="blue-grey">
+          <h2 class="md-title">{{ supplier.rz }}</h2>
         </md-toolbar>
         <md-card-area>
-          <md-tabs md-right :md-dynamic-height="false" class="md-transparent">
+          <md-tabs md-centered :md-dynamic-height="false" class="md-transparent">
             <md-tab class="example-content" md-label="Datos">
               <div>Data tab content</div>
             </md-tab>
@@ -88,7 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 .md-tabs {
-  margin-top: -48px;
+  // margin-top: -48px;
 }
 
 .md-card {
