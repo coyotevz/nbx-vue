@@ -5,11 +5,16 @@
         <md-toolbar class="md-dense" md-theme="blue-grey"
           @mouseenter.native="showActions = true"
           @mouseleave.native="showActions = false">
-          <h2 class="md-title">{{ supplier.rz }}</h2>
+          <div class="md-title">
+            <span>{{ supplier.rz }}</span>
+            <span class="md-title" v-if="supplier.name">{{ supplier.name }}</span>
+          </div>
           <div class="supplier-actions" v-if="showActions">
-            <md-button class="md-icon-button">
+            <router-link
+              :to="{ name: 'suppliers:edit', params: { id: supplier.$id }}"
+              tag="md-button" class="md-icon-button">
               <md-icon>edit</md-icon>
-            </md-button>
+            </router-link>
           </div>
         </md-toolbar>
         <md-card-area>
@@ -57,7 +62,7 @@ export default {
     }
   },
   created() {
-    this.$parent.setTitle('Proveedores')
+    this.$root.setTitle('Proveedores')
     this.fetchData()
   },
 
@@ -94,10 +99,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.md-tabs {
-  // margin-top: -48px;
+.supplier-detail {
+  .md-card {
+    .md-title > .md-title {
+      margin-left: 6px;
+      padding-left: 12px;
+      border-left: 1px solid;
+    }
+  }
 }
-
 .md-card {
   margin-bottom: 16px;
 

@@ -152,5 +152,6 @@ export default {
 
 .md-table-pagination {
   max-height: 41px;
+  min-height: 41px;
 }
 </style>

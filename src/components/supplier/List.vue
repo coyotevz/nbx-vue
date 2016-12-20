@@ -104,10 +104,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$list-height: 592px;
 
 .suppliers-list {
-  min-height: $list-height;
   justify-content: space-between;
 
   .md-table-header,
@@ -120,7 +118,7 @@ $list-height: 592px;
   }
 
   .md-table-pagination {
-    flex: 0;
+    // flex: 0;
   }
 
   .spinner-container {
