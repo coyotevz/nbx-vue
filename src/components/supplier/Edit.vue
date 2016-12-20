@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { diffData } from 'lib/utils'
+
 export default {
   name: 'supplier-edit',
   data() {
@@ -38,7 +40,7 @@ export default {
   },
   watch: {
     supplier(newSupplier) {
-      console.log('supplier change:', newSupplier)
+      console.log('supplier change:', diffData(this._origSupplier, newSupplier))
     }
   },
   methods: {
@@ -49,22 +51,32 @@ export default {
       this.$http.get('suppliers/' + this.$route.params.id).then(response => {
         this.loading = false
         this.supplier = response.data
+        this._origSupplier = JSON.parse(JSON.stringify(response.data))
       }).catch(error => {
         this.loading = false
         this.error = error
       })
     },
     saveData() {
+      /*
       let supplier = {
         rz: this.supplier.rz,
         name: this.supplier.name,
       }
+      */
 
+      console.log('origSupplier.name:', this._origSupplier.name)
+      console.log('supplier.name:', this.supplier.name)
+
+      console.log('supplier change:', diffData(this._origSupplier, this.supplier))
+
+      /*
       this.$http.patch('suppliers/' + this.$route.params.id, supplier).then(response => {
         console.log(response.data)
       }).catch(error => {
         console.log(error.data)
       })
+      */
     },
   },
 }
