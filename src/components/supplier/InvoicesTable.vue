@@ -129,6 +129,8 @@ export default {
 
 <style lang="scss">
 .md-table {
+  flex-grow: 1;
+
   .md-table-row {
     &.bg-status-atention { background-color: #ddd; }
     &.bg-status-warning { background-color: rgba(244,67,54,0.12); }
@@ -146,5 +148,9 @@ export default {
       margin: initial;
     }
   }
+}
+
+.md-table-pagination {
+  max-height: 41px;
 }
 </style>

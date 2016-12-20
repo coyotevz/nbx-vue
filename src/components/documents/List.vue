@@ -35,6 +35,8 @@
     <nbx-table-pagination
       :nbx-page="tableOptions.page"
       :nbx-total="tableOptions.total"
+      :nbx-label="'Filas por página'"
+      :nbx-separator="'de'"
       @pagination="onPagination"></nbx-table-pagination>
   </md-table-card>
 </template>

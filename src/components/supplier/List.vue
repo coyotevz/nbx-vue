@@ -28,12 +28,10 @@
     </md-table>
     <div class="no-content-table" v-if="!loading && suppliers.length < 1">Void table</div>
     <nbx-table-pagination
-      nbx-size="10"
       :nbx-page="tableOptions.page"
       :nbx-total="tableOptions.total"
-      nbx-label=""
-      nbx-separator="de"
-      :nbx-page-options="false"
+      :nbx-label="'Filas por página'"
+      :nbx-separator="'de'"
       @pagination="onPagination"></nbx-table-pagination>
   </md-table-card>
 </template>
@@ -55,6 +53,7 @@ export default {
       tableOptions: {
         total: 0,
         page: 1,
+        size: 10,
       },
     }
   },
@@ -72,6 +71,7 @@ export default {
       this.fetchData()
     },
     onPagination(ev) {
+      this.tableOptions.size = ev.size
       this.tableOptions.page = ev.page
       this.fetchData()
     },
@@ -82,7 +82,7 @@ export default {
 
       const params = {
         sort: JSON.stringify(sort),
-        per_page: 10,
+        per_page: this.tableOptions.size,
         page: this.tableOptions.page,
       }
 
