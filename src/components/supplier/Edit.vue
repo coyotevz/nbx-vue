@@ -1,6 +1,6 @@
 <template>
   <md-layout v-if="supplier">
-    <md-layout md-flex="50" md-flex-offset="25">
+    <md-layout md-flex-medium="50" md-flex-offset="25">
       <md-card class="edit-card">
         <md-card-header>
           <span class="md-subheading">Datos Basicos</span>
@@ -35,6 +35,11 @@ export default {
   created() {
     this.$root.setTitle('Editar Proveedor')
     this.fetchData()
+  },
+  watch: {
+    supplier(newSupplier) {
+      console.log('supplier change:', newSupplier)
+    }
   },
   methods: {
     fetchData() {
