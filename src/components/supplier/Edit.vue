@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { diffData } from 'lib/utils'
+import { diff, cloneDeep } from 'lib/utils'
 
 export default {
   name: 'supplier-edit',
@@ -38,11 +38,6 @@ export default {
     this.$root.setTitle('Editar Proveedor')
     this.fetchData()
   },
-  watch: {
-    supplier(newSupplier) {
-      console.log('supplier change:', diffData(this._origSupplier, newSupplier))
-    }
-  },
   methods: {
     fetchData() {
       this.error = this.supplier = null
@@ -51,32 +46,24 @@ export default {
       this.$http.get('suppliers/' + this.$route.params.id).then(response => {
         this.loading = false
         this.supplier = response.data
-        this._origSupplier = JSON.parse(JSON.stringify(response.data))
+        this._origSupplier = cloneDeep(this.supplier)
       }).catch(error => {
         this.loading = false
         this.error = error
       })
     },
     saveData() {
-      /*
-      let supplier = {
-        rz: this.supplier.rz,
-        name: this.supplier.name,
+      let supplierData = diff(this._origSupplier, this.supplier)
+
+      if (Object.keys(supplierData).length > 0) {
+        this.$http.patch('suppliers/' + this.$route.params.id, supplierData).then(response => {
+          console.log(response.data)
+        }).catch(error => {
+          console.log(error.data)
+        })
       }
-      */
 
-      console.log('origSupplier.name:', this._origSupplier.name)
-      console.log('supplier.name:', this.supplier.name)
-
-      console.log('supplier change:', diffData(this._origSupplier, this.supplier))
-
-      /*
-      this.$http.patch('suppliers/' + this.$route.params.id, supplier).then(response => {
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error.data)
-      })
-      */
+      this.$router.push({ name: 'suppliers:detail', params: { id: this.supplier.$id } })
     },
   },
 }
