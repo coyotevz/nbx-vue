@@ -18,6 +18,8 @@ module.exports = {
     'comma-dangle': [1, 'only-multiline'],
     // allow space-before-function-parentheses
     'space-before-function-paren': [1, 'never'],
+    // enforce spacing between rest and spread operators
+    'rest-spread-spacing': [1, 'never'],
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
