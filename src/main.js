@@ -9,8 +9,8 @@ import 'vue-material/dist/vue-material.css'
 import Application from './Application'
 import routes from './routes'
 import themes from './themes'
-
 import Filters from './filters'
+import 'stylesheet/main.scss'
 
 Vue.use(Router)
 Vue.use(Material)

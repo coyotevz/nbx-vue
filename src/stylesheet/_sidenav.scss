@@ -1,0 +1,17 @@
+@import "variables";
+
+.main-sidenav.md-sidenav {
+  .md-sidenav-content {
+    width: $sidenav-size;
+  }
+
+  &.md-active {
+    .md-sidenav-content {
+      box-shadow: 0 0 4px rgba(0,0,0,0.28);
+    }
+
+    .md-sidenav-backdrop {
+      opacity: 0;
+    }
+  }
+}

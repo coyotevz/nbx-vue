@@ -1,12 +1,14 @@
 <template>
-  <div id="application" class="container" md-theme="'default'">
-    <md-sidenav :visible="true" class="main-sidebar md-left md-fixed" ref="main-sidebar">
+  <div id="application" class="container">
+
+    <md-sidenav :visible="true" class="main-sidenav md-left md-fixed"
+      ref="main-sidenav">
       <md-toolbar class="nbx-logo" md-theme="white">
         <span>NBX app</span>
       </md-toolbar>
 
-      <div class="main-sidebar-links">
-        <md-list class="md-dense">
+      <div class="sidenav-links">
+        <md-list>
           <md-list-item>
             <router-link exact :to="{name: 'dashboard' }">Tablero</router-link>
           </md-list-item>
@@ -50,28 +52,21 @@
     </md-sidenav>
 
     <div class="page-content">
-      <md-whiteframe md-elevation="1" class="main-header">
-        <md-toolbar>
-          <md-button class="md-icon-button nav-trigger" @click="toggleSidenav">
-            <md-icon>menu</md-icon>
-          </md-button>
-          <div class="md-title">{{ pageTitle }}</div>
 
-          <md-button class="md-icon-button">
-            <md-icon>account_circle</md-icon>
-          </md-button>
-        </md-toolbar>
-      </md-whiteframe>
+      <ui-toolbar :page-title="pageTitle"></ui-toolbar>
 
       <div class="main-content">
         <router-view></router-view>
       </div>
+
     </div>
 
   </div>
 </template>
 
 <script>
+import UiToolbar from 'ui/Toolbar.vue'
+
 export default {
   name: 'application',
   data() {
@@ -82,13 +77,13 @@ export default {
   },
   methods: {
     toggleSidenav() {
-      this.$refs['main-sidebar'].toggle()
+      this.$refs['main-sidenav'].toggle()
     },
     openSidenar() {
-      this.$refs['main-sidebar'].open()
+      this.$refs['main-sidenav'].open()
     },
     closeSidenav() {
-      this.$refs['main-sidebar'].close()
+      this.$refs['main-sidenav'].close()
     },
     setTitle(title) {
       this.pageTitle = title
@@ -96,23 +91,15 @@ export default {
   },
   mounted() {
     document.title = 'NBX - ' + this.pageTitle
-  }
+  },
+  components: {
+    UiToolbar,
+  },
 }
 </script>
 
 <style lang="scss">
-@import '~vue-material/src/core/stylesheets/variables.scss';
-$sidebar-size: 280px;
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-}
-
+/*
 .container {
   min-height: 100%;
   display: flex;
@@ -123,8 +110,10 @@ body {
   @media (min-width: $breakpoint-medium) {
     padding-left: $sidebar-size;
   }
-}
+  }
+  */
 
+/*
 .main-sidebar.md-sidenav {
   .md-sidenav-content {
     width: $sidebar-size;
@@ -216,5 +205,6 @@ body {
       }
     }
   }
-}
+  }
+  */
 </style>

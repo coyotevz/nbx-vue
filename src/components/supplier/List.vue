@@ -1,5 +1,34 @@
 <template>
-  <md-table-card class="suppliers-list">
+  <div class="ui-list suppliers-list">
+    <div class="ui-list-header">
+      <div class="ui-list-item">
+        <div class="ui-list-cell header-title">Proveedores por nombre</div>
+      </div>
+    </div>
+    <div class="ui-list-body" role="listbox" v-if="suppliers.length">
+      <div class="ui-list-item" v-for="supplier in suppliers"
+        @click="showDetail(supplier.$id)">
+        <div class="ui-list-cell item-icon"><md-icon>business</md-icon></div>
+        <div class="ui-list-cell item-title rz"><span>{{ supplier.rz }}</span></div>
+        <div class="ui-list-cell item-secondary name">{{ supplier.name }}</div>
+        <div class="ui-list-cell item-date expiration">
+          {{ supplier.expiration_date | date }}
+        </div>
+        <div class="ui-list-cell item-money debt">{{ supplier.debt | money }}</div>
+        <div class="ui-list-cell item-actions">
+          <div class="action"><md-icon>more_vert</md-icon></div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-list-empty" v-else>
+      <div class="empty-notice">Todavía no tienes proveedores.</div>
+      <div class="empty-create">Haz click en + para crear un proveedor.</div>
+    </div>
+    <md-button class="md-fab md-fab-bottom-right">
+      <md-icon>add</md-icon>
+    </md-button>
+  </div>
+  <!--md-table-card class="suppliers-list">
 
     <div class="spinner-container" v-if="loading">
       <md-spinner md-indeterminate></md-spinner>
@@ -33,12 +62,10 @@
       :nbx-label="'Filas por página'"
       :nbx-separator="'de'"
       @pagination="onPagination"></nbx-table-pagination>
-  </md-table-card>
+  </md-table-card-->
 </template>
 
 <script>
-import NbxTablePagination from 'ui/nbxTablePagination'
-
 export default {
   name: 'supplier-list',
   data() {
@@ -95,16 +122,27 @@ export default {
         this.loading = false
         this.error = error
       })
+    },
+    showDetail(id) {
+      this.$router.push({ name: 'suppliers:detail', params: { 'id': id } })
     }
   },
-  components: {
-    NbxTablePagination,
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 
+.suppliers-list {
+  .header-title {
+    width: 50%;
+    margin-right: 52px;
+  }
+  .item-icon {
+    color: #4285f4;
+  }
+}
+
+/*
 .suppliers-list {
   justify-content: space-between;
 
@@ -133,4 +171,5 @@ export default {
     background-color: rgba(255, 255, 255, 0.8);
   }
 }
+*/
 </style>

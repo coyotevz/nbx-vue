@@ -1,56 +1,51 @@
 <template>
-  <div class="supplier-detail">
-    <div class="row">
-      <md-card class="general-data" v-if="supplier">
-        <md-toolbar class="md-dense" md-theme="blue-grey"
-          @mouseenter.native="showActions = true"
-          @mouseleave.native="showActions = false">
-          <div class="md-title">
-            <span>{{ supplier.rz }}</span>
-            <span class="md-title" v-if="supplier.name">{{ supplier.name }}</span>
-          </div>
-          <div class="supplier-actions" v-if="showActions">
-            <router-link
-              :to="{ name: 'suppliers:edit', params: { id: supplier.$id }}"
-              tag="md-button" class="md-icon-button">
-              <md-icon>edit</md-icon>
+  <div class="detail-view supplier-detail">
+    <div class="summary-container" v-if="supplier">
+
+      <div class="ui-sidebar">
+        <div class="ui-sidebar-header">
+            <router-link class="ui-title"
+              :to="{name: 'suppliers:detail',
+                    params: { id: supplier.$id } }" exact>
+              {{ supplier.rz }}
             </router-link>
-          </div>
-        </md-toolbar>
-        <md-card-area>
-          <md-tabs md-centered :md-dynamic-height="false" class="md-transparent">
-            <md-tab class="notes-content" md-label="Notas" v-if="supplier.notes">
-              <div>{{ supplier.notes }}</div>
-            </md-tab>
-            <md-tab class="banks-content" md-label="Bancos">
-              <span>Bank data</span>
-            </md-tab>
-            <md-tab class="contacts-content" md-label="Contactos">
-              <div>Contacts tab content</div>
-            </md-tab>
-            <md-tab class="comercial-content" md-label="Acuerdos">
-              <span>Comercial agreetment data</span>
-            </md-tab>
-            <md-tab class="data-content" md-label="Datos" v-if="supplier.address.length">
-              <span><strong>Dirección</strong> {{ supplier.address[0].street }} {{ supplier.address[0].streetnumber }}</span>
-            </md-tab>
-          </md-tabs>
-        </md-card-area>
-      </md-card>
+          <span class="ui-subtitle">{{ supplier.name }}</span>
+        </div>
+
+        <div class="ui-sidebar-menu">
+          <ul>
+            <router-link tag="li" class="menu-item"
+              :to="{name: 'suppliers:detail:documents',
+                    params: { id: supplier.$id } }">
+              <a>Facturas</a>
+            </router-link>
+            <router-link tag="li" class="menu-item"
+              :to="{name: 'suppliers:detail:orders',
+                    params: { id: supplier.$id } }">
+              <a>Pedidos</a>
+            </router-link>
+            <router-link tag="li" class="menu-item"
+              :to="{name: 'suppliers:detail:data',
+                    params: { id: supplier.$id } }">
+              <a>Datos comerciales</a>
+            </router-link>
+            <router-link tag="li" class="menu-item"
+              :to="{name: 'suppliers:detail:contacts',
+                    params: { id: supplier.$id } }">
+              <a>Contactos</a>
+            </router-link>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="row">
-      <invoices-table :nbx-supplier="supplier"></invoices-table>
-      <orders-table :nbx-supplier="supplier"></orders-table>
+    <div class="area-container" v-if="supplier">
+      <router-view></router-view>
     </div>
-
   </div>
 </template>
 
 <script>
-import InvoicesTable from './InvoicesTable'
-import OrdersTable from './OrdersTable'
-
 export default {
   name: 'supplier-list',
   data() {
@@ -91,51 +86,5 @@ export default {
       console.log('on mouse over:', ev)
     }
   },
-  components: {
-    InvoicesTable,
-    OrdersTable,
-  }
 }
 </script>
-
-<style lang="scss" scoped>
-.supplier-detail {
-  .md-card {
-    .md-title > .md-title {
-      margin-left: 6px;
-      padding-left: 12px;
-      border-left: 1px solid;
-    }
-  }
-}
-.md-card {
-  margin-bottom: 16px;
-
-  .md-toolbar {
-    .md-title {
-      flex: 1;
-    }
-  }
-}
-
-.row {
-  display: flex;
-}
-
-.general-data {
-  flex: 1 1 100%;
-}
-
-.invoices,
-.orders {
-  flex: 1 1 50%;
-}
-
-.invoices {
-  margin-right: 8px;
-}
-
-.orders {
-  margin-left: 8px;
-}
-</style>

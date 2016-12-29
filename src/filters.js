@@ -1,4 +1,5 @@
 import dateFns from 'date-fns'
+import Locale from 'date-fns/locale/es'
 import accounting from './lib/accounting'
 
 const currencyOptions = {
@@ -9,7 +10,7 @@ const currencyOptions = {
   format: {
     pos: '%s %v',
     neg: '%s (%v)',
-    zero: '-',
+    zero: '',
   }
 }
 
@@ -25,7 +26,9 @@ export default function filters(Vue) {
   }
 
   Vue.filter('date', value => {
-    if (value && value.$date) return dateFns.format(value.$date, 'DD/MM/YYYY')
+    if (value && value.$date) {
+      return dateFns.format(value.$date, 'DD MMM YYYY', { locale: Locale })
+    }
     return value
   })
 

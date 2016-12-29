@@ -1,7 +1,7 @@
 export default {
   default: {
     primary: 'blue',
-    accent: 'pink',
+    accent: 'red',
   },
   blue: {
     primary: 'blue',

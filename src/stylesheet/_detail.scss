@@ -1,0 +1,19 @@
+.detail-view {
+  padding: 0 30px;
+  width: auto;
+  display: flex;
+
+  .summary-container {
+    padding-top: 25px;
+    padding-right: 40px;
+    width: 265px;
+    //min-width: 265px;
+    display: inline-block;
+    position: fixed;
+  }
+
+  .area-container {
+    display: inline-block;
+    margin-left: 265px
+  }
+}

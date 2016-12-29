@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #eee !important;
+  color: #555 !important;
+}
+
+html, body {
+  height: 100%;
+  font-family: Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  max-height: 100vh;
+}
+
+.main-content {
+  height: 100%;
+  overflow: auto;
+}
