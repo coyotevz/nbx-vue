@@ -8,6 +8,7 @@ import 'vue-material/dist/vue-material.css'
 
 import Application from './Application'
 import routes from './routes'
+import store from './store'
 import themes from './themes'
 import Filters from './filters'
 import 'stylesheet/main.scss'
@@ -47,6 +48,7 @@ router.beforeEach((to, from, next) => {
 let App = Vue.component('app', Application)
 
 let app = new App({
+  store,
   el: '#application',
   router,
 })
