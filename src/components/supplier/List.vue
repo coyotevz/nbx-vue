@@ -20,9 +20,12 @@
         </div>
       </div>
     </div>
-    <div class="ui-list-empty" v-else>
+    <div class="ui-list-empty" v-else-if="!loading">
       <div class="empty-notice">Todavía no tienes proveedores.</div>
       <div class="empty-create">Haz click en + para crear un proveedor.</div>
+    </div>
+    <div class="ui-list-loading" v-else>
+      <md-spinner md-indeterminate></md-spinner>
     </div>
     <md-button class="md-fab md-fab-bottom-right">
       <md-icon>add</md-icon>
@@ -31,11 +34,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'supplier-list',
   data() {
     return {
-      loading: false,
       error: null,
     }
   },
@@ -43,9 +46,10 @@ export default {
     this.$root.setTitle('Proveedores')
     this.$store.dispatch('fetchSuppliers')
   },
-  computed: {
-    suppliers: state => state.$store.suppliers
-  },
+  computed: mapGetters({
+    suppliers: 'getSuppliers',
+    loading: 'isLoading',
+  }),
   methods: {
     showDetail(id) {
       this.$router.push({ name: 'suppliers:detail', params: { 'id': id } })

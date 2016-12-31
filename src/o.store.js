@@ -20,9 +20,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchSuppliers({ commit }) {
-      api.getSuppliers(suppliers => {
-        commit(RECEIVE_SUPPLIERS, { suppliers })
-      })
+      api.get('suppliers').then(response => commit(RECEIVE_SUPPLIERS, response.data))
     }
   }
 })

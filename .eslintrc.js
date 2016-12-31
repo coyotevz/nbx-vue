@@ -17,7 +17,7 @@ module.exports = {
     // allow comma-dangle only on multiline
     'comma-dangle': [1, 'only-multiline'],
     // allow space-before-function-parentheses
-    'space-before-function-paren': [1, 'never'],
+    'space-before-function-paren': 0,
     // enforce spacing between rest and spread operators
     'rest-spread-spacing': [1, 'never'],
     // allow async-await

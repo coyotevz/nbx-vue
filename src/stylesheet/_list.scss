@@ -136,7 +136,8 @@
     }
   }
 
-  .ui-list-empty {
+  .ui-list-empty,
+  .ui-list-loading {
     background-color: white;
     border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -148,7 +149,9 @@
     justify-content: center;
     color: #888;
     font-size: 16px;
+  }
 
+  .ui-list-empty {
     .empty-notice {
       color: #222;
       font-size: 18px;
@@ -163,6 +166,12 @@
         margin-top: 0;
         margin-bottom: 0;
       }
+    }
+  }
+
+  .ui-list-loading {
+    .md-spinner {
+      margin: auto;
     }
   }
 }
