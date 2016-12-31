@@ -5,7 +5,10 @@
         <div class="ui-list-cell header-title">Proveedores por nombre</div>
       </div>
     </div>
-    <div class="ui-list-body" role="listbox" v-if="suppliers && suppliers.length">
+    <div class="ui-list-loading" v-if="loading">
+      <md-spinner md-indeterminate></md-spinner>
+    </div>
+    <div class="ui-list-body" role="listbox" v-else-if="suppliers && suppliers.length">
       <div class="ui-list-item" v-for="supplier in suppliers"
         @click="showDetail(supplier.$id)">
         <div class="ui-list-cell item-icon"><md-icon>business</md-icon></div>
@@ -20,12 +23,9 @@
         </div>
       </div>
     </div>
-    <div class="ui-list-empty" v-else-if="!loading">
+    <div class="ui-list-empty" v-else>
       <div class="empty-notice">Todavía no tienes proveedores.</div>
       <div class="empty-create">Haz click en + para crear un proveedor.</div>
-    </div>
-    <div class="ui-list-loading" v-else>
-      <md-spinner md-indeterminate></md-spinner>
     </div>
     <md-button class="md-fab md-fab-bottom-right">
       <md-icon>add</md-icon>
