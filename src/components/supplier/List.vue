@@ -19,7 +19,21 @@
         </div>
         <div class="ui-list-cell item-money debt">{{ supplier.debt | money }}</div>
         <div class="ui-list-cell item-actions">
-          <div class="action"><md-icon>more_vert</md-icon></div>
+          <md-menu ref="menu" md-size="4" md-direction="bottom left" md-align-trigger>
+            <div class="action" @click.prevent.stop md-menu-trigger><md-icon>more_vert</md-icon></div>
+
+            <md-menu-content>
+              <md-menu-item>
+                <md-icon>phone</md-icon>
+                <span>My Item 1</span>
+              </md-menu-item>
+              <md-menu-item>
+                <md-icon>phone</md-icon>
+                <span>My Item 2</span>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+
         </div>
       </div>
     </div>
