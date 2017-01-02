@@ -25,4 +25,12 @@ html, body {
 .main-content {
   height: 100%;
   overflow: auto;
+
+  .suppliers-list {
+    margin: auto;
+    width: 690px;
+    @media only screen and (min-width: 1100px) {
+      & { width: 920px; }
+    }
+  }
 }
