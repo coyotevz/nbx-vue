@@ -3,6 +3,7 @@ import * as getters from './getters'
 
 import {
   FETCH_SUPPLIERS,
+  FETCH_SUPPLIER,
   // CREATE_SUPPLIER,
   // UPDATE_SUPPLIER,
   // DELETE_SUPPLIER,
@@ -13,6 +14,7 @@ import {
 // initial state
 const initialState = {
   all: [],
+  current: null,
   loading: false,
 }
 
@@ -20,6 +22,9 @@ const initialState = {
 const mutations = {
   [FETCH_SUPPLIERS] (state, suppliers) {
     state.all = suppliers
+  },
+  [FETCH_SUPPLIER] (state, supplier) {
+    state.current = supplier
   },
   [SET_LOADING] (state) {
     state.loading = true

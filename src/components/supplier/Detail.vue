@@ -46,44 +46,29 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'supplier-list',
   data() {
     return {
-      loading: false,
       error: null,
-      supplier: null,
       showActions: false,
     }
   },
+  computed: mapGetters({
+    supplier: 'getCurrentSupplier',
+    loading: 'isLoading',
+  }),
   created() {
     this.$root.setTitle('Proveedores')
-    this.fetchData()
+    this.$store.dispatch('setCurrentSupplier', this.$route.params.id)
   },
 
   watch: {
     '$route'(to, from) {
       if (from.params.id !== to.params.id) {
-        this.fetchData()
+        this.$store.dispatch('setCurrentSupplier', to.params.id)
       }
-    }
-  },
-
-  methods: {
-    fetchData() {
-      this.error = this.supplier = null
-      this.loading = true
-
-      this.$http.get('suppliers/' + this.$route.params.id).then(response => {
-        this.loading = false
-        this.supplier = response.data
-      }).catch(error => {
-        this.loading = false
-        this.error = error
-      })
-    },
-    onMouseEvent(ev) {
-      console.log('on mouse over:', ev)
     }
   },
 }
