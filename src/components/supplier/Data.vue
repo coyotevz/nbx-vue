@@ -1,11 +1,87 @@
 <template>
   <div class="supplier-data">
-    <span>Supplier data</span>
+    <md-layout :md-gutter="8">
+      <md-layout>
+        <md-card>
+          <md-card-header>
+            <div class="md-title">Datos Fiscales</div>
+            <md-button class="md-icon-button edit"><md-icon>edit</md-icon></md-button>
+          </md-card-header>
+
+          <md-card-content>
+            Lorem corrupti corrupti quaerat labore quo Natus libero ipsa nostrum ad perspiciatis Quibusdam vel iusto dolor fugiat eos? Sint reiciendis animi unde perferendis libero voluptatibus? Veritatis nisi tempore adipisci facilis?
+          </md-card-content>
+
+          <md-card-actions>
+            <md-button class="md-primary">Action</md-button>
+            <md-button>Action</md-button>
+          </md-card-actions>
+        </md-card>
+      </md-layout>
+      <md-layout>
+        <md-card>
+          <md-card-header>
+            <div class="md-title">Datos Fiscales</div>
+            <md-button class="md-icon-button edit"><md-icon>edit</md-icon></md-button>
+          </md-card-header>
+
+          <md-card-content>
+            Lorem corrupti corrupti quaerat labore quo Natus libero ipsa nostrum ad perspiciatis Quibusdam vel iusto dolor fugiat eos? Sint reiciendis animi unde perferendis libero voluptatibus? Veritatis nisi tempore adipisci facilis?
+          </md-card-content>
+
+          <md-card-actions>
+            <md-button class="md-primary">Action</md-button>
+            <md-button>Action</md-button>
+          </md-card-actions>
+        </md-card>
+      </md-layout>
+      <md-layout>
+        <md-card>
+          <md-card-header>
+            <div class="md-title">Datos Fiscales</div>
+            <md-button class="md-icon-button edit"><md-icon>edit</md-icon></md-button>
+          </md-card-header>
+
+          <md-card-content>
+            Lorem corrupti corrupti quaerat labore quo Natus libero ipsa nostrum ad perspiciatis Quibusdam vel iusto dolor fugiat eos? Sint reiciendis animi unde perferendis libero voluptatibus? Veritatis nisi tempore adipisci facilis?
+          </md-card-content>
+
+          <md-card-actions>
+            <md-button class="md-primary">Action</md-button>
+            <md-button>Action</md-button>
+          </md-card-actions>
+        </md-card>
+      </md-layout>
+    </md-layout>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'supplier-data',
+  computed: mapGetters({
+    supplier: 'getCurrentSupplier'
+  })
 }
 </script>
+
+<style lang="scss">
+.supplier-data {
+  padding-top: 25px;
+
+  .md-card-header {
+    display: flex;
+    .md-title {
+      flex: 1;
+      font-size: 16px;
+      line-height: 20px;
+    }
+    .md-button.md-icon-button {
+      line-height: 20px;
+      padding: 0;
+    }
+  }
+}
+</style>
