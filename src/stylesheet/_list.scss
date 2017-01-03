@@ -53,6 +53,7 @@
       color: #444;
       user-select: none;
       display: flex;
+      overflow: hidden;
 
       &:hover {
         background-color: #eef6ff;
