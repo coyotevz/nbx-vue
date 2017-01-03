@@ -9,11 +9,13 @@ import {
   // DELETE_SUPPLIER,
   SET_LOADING,
   UNSET_LOADING,
+  SET_TOTAL,
 } from './types'
 
 // initial state
 const initialState = {
   all: [],
+  total_count: 0,
   current: null,
   loading: false,
 }
@@ -31,7 +33,10 @@ const mutations = {
   },
   [UNSET_LOADING] (state) {
     state.loading = false
-  }
+  },
+  [SET_TOTAL] (state, total) {
+    state.total_count = total
+  },
 }
 
 export default {

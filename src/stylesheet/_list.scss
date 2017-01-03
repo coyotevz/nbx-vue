@@ -11,6 +11,8 @@
 
   .ui-list-header {
     .ui-list-item {
+      display: flex;
+
       .ui-list-cell {
         color: #404040;
         line-height: 46px;
@@ -35,6 +37,9 @@
 
     .header-title {
       font-weight: 500;
+      flex: 1 0 auto;
+    }
+    .header-action {
     }
   }
 
@@ -127,6 +132,16 @@
             }
           }
         }
+      }
+    }
+  }
+
+  .ui-list-footer {
+    .ui-list-item {
+      display: flex;
+      .md-button {
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }

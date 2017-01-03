@@ -5,13 +5,15 @@ import {
   FETCH_SUPPLIER,
   SET_LOADING,
   UNSET_LOADING,
+  SET_TOTAL,
 } from './types'
 
-export function fetchSuppliers({ commit }) {
+export function fetchSuppliers({ commit }, options) {
   commit(SET_LOADING)
-  return api.get('suppliers')
+  return api.get('suppliers', options)
     .then(response => {
       commit(FETCH_SUPPLIERS, response.data)
+      commit(SET_TOTAL, response.headers['x-total-count'])
       commit(UNSET_LOADING)
     })
 }
@@ -29,4 +31,10 @@ export function setCurrentSupplier({ commit, state }, id) {
         commit(UNSET_LOADING)
       })
   }
+}
+
+export function setSort({ commit }, sort) {
+  let options = { params: { sort } }
+  console.log('params:', options)
+  fetchSuppliers({ commit }, options)
 }

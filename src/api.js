@@ -7,13 +7,13 @@ const proxy = axios.create({
 
 export default {
   get(url, options) {
-    return proxy.get(url)
+    return proxy.get(url, options)
   },
   post(url, options) {
-    return proxy.post(url)
+    return proxy.post(url, options)
   },
   put(url, options) {
-    return proxy.put(url)
+    return proxy.put(url, options)
   },
   delete(url) {
     return proxy.delete(url)
