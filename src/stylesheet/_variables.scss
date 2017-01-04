@@ -1,3 +1,8 @@
 @import '~vue-material/src/core/stylesheets/variables.scss';
 
 $sidenav-size: 280px;
+
+$line-height-base: 20/14;
+$line-height-computed: floor((14 * $line-height-base));
+$dl-horizontal-breakpoint: 768px;
+$dl-horizontal-offset: 160px;
