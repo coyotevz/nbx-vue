@@ -44,7 +44,7 @@
       <div class="empty-notice">Todavía no tienes proveedores.</div>
       <div class="empty-create">Haz click en + para crear un proveedor.</div>
     </div>
-    <md-button class="md-fab md-fab-bottom-right">
+    <md-button class="md-fab md-fab-bottom-right" @click="$router.push({ name: 'suppliers:new' })">
       <md-icon>add</md-icon>
     </md-button>
   </div>
@@ -63,7 +63,7 @@ export default {
   created() {
     this.$store.dispatch('fetchSuppliers')
     this.$root.setTitle('Proveedores')
-    this.$root.setCurrentRoute({ name: this.$route.name })
+    this.$root.setCurrentRoute({ name: 'suppliers:list' })
   },
   computed: mapGetters({
     suppliers: 'getSuppliers',

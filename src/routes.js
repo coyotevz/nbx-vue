@@ -3,6 +3,7 @@ import Dashboard from 'components/Dashboard'
 import SuppliersList from 'components/supplier/List'
 import SupplierDetail from 'components/supplier/Detail'
 import SupplierEdit from 'components/supplier/Edit'
+import SupplierNew from 'components/supplier/New'
 import SupplierProfile from 'components/supplier/Profile'
 import SupplierDocuments from 'components/supplier/Documents'
 import SupplierOrders from 'components/supplier/Orders'
@@ -24,6 +25,11 @@ export default [
     path: '/suppliers',
     name: 'suppliers:list',
     component: SuppliersList,
+  },
+  {
+    path: '/suppliers/new',
+    name: 'suppliers:new',
+    component: SupplierNew,
   },
   {
     path: '/suppliers/:id',

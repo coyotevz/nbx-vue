@@ -90,6 +90,8 @@ export default {
       this.pageTitle = title
     },
     setCurrentRoute(current) {
+      // TODO: needs more work...
+      console.log('setCurrentRoute:', current)
       this.to = current
     }
   },
