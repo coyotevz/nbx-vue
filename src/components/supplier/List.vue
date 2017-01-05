@@ -61,8 +61,9 @@ export default {
     }
   },
   created() {
-    this.$root.setTitle('Proveedores')
     this.$store.dispatch('fetchSuppliers')
+    this.$root.setTitle('Proveedores')
+    this.$root.setCurrentRoute({ name: this.$route.name })
   },
   computed: mapGetters({
     suppliers: 'getSuppliers',

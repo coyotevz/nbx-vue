@@ -3,7 +3,9 @@
     <md-button class="md-icon-button nav-trigger" @click="toggleSidenav">
       <md-icon>menu</md-icon>
     </md-button>
-    <div class="md-title">{{ pageTitle }}</div>
+    <div class="md-title">
+      <router-link :to="to" exact>{{ pageTitle }}</router-link>
+    </div>
     <ui-search></ui-search>
     <md-button class="md-icon-button">
       <md-icon>apps</md-icon>
@@ -25,7 +27,7 @@ import UiSearch from 'ui/Search.vue'
 
 export default {
   name: 'ui-toolbar',
-  props: ['pageTitle'],
+  props: ['pageTitle', 'to'],
   methods: {
     toggleSidenav() {
       this.$parent.toggleSidenav()

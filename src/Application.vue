@@ -53,7 +53,7 @@
 
     <div class="page-content">
 
-      <ui-toolbar :page-title="pageTitle"></ui-toolbar>
+      <ui-toolbar :page-title="pageTitle" :to="to"></ui-toolbar>
 
       <div class="main-content">
         <router-view></router-view>
@@ -72,7 +72,8 @@ export default {
   data() {
     return {
       toolbar: true,
-      pageTitle: 'Title'
+      pageTitle: 'Title',
+      to: { path: '/' },
     }
   },
   methods: {
@@ -88,6 +89,9 @@ export default {
     setTitle(title) {
       this.pageTitle = title
     },
+    setCurrentRoute(current) {
+      this.to = current
+    }
   },
   mounted() {
     document.title = 'NBX - ' + this.pageTitle
@@ -97,114 +101,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-/*
-.container {
-  min-height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  flex: 1;
-  transition: $swift-ease-out;
-
-  @media (min-width: $breakpoint-medium) {
-    padding-left: $sidebar-size;
-  }
-  }
-  */
-
-/*
-.main-sidebar.md-sidenav {
-  .md-sidenav-content {
-    width: $sidebar-size;
-    display: flex;
-    flex-flow: column;
-
-    @media (min-width: $breakpoint-medium) {
-      top: 0;
-      pointer-events: auto;
-      transform: translate3d(0, 0, 0);
-      box-shadow: $material-shadow-2dp;
-    }
-  }
-
-  .md-backdrop {
-    @media (min-width: $breakpoint-medium) {
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
-
-  .md-toolbar {
-    min-height: 172px;
-    border-bottom: 1px solid rgba(#000, .12);
-  }
-
-  .nbx-logo {
-    font-size: 24px;
-
-    img {
-      width: 160px;
-      margin-bottom: 16px;
-    }
-  }
-
-  .main-sidebar-links {
-    overflow: auto;
-
-    .md-inset .md-list-item-container {
-      padding-left: 36px;
-    }
-
-    .md-list-item-container {
-      font-size: 14px;
-      font-weight: 500;
-    }
-  }
-}
-
-.main-content {
-  padding: 16px;
-  flex: 1;
-  overflow: auto;
-  background-color: #eee;
-
-  @media (max-width: $breakpoint-small) {
-    padding: 8px;
-  }
-  @media (max-width: $breakpoint-xsmall) {
-    padding: 0;
-  }
-}
-
-.page-content {
-  flex: 1;
-  display: flex;
-  flex-flow: column;
-  max-height: 100vh;
-}
-
-.main-header {
-  position: relative;
-  z-index: 2;
-
-  .md-toolbar {
-    color: #fff !important;
-
-    .nav-trigger {
-      @media (min-width: $breakpoint-medium) {
-        display: none;
-      }
-    }
-
-    .md-title {
-      flex: 1;
-
-      @media (min-width: $breakpoint-medium) {
-        margin-left: 8px;
-      }
-    }
-  }
-  }
-  */
-</style>
