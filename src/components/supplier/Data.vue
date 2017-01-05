@@ -28,7 +28,7 @@
             </dl>
             <dl v-if="supplier.fiscal_data.cuit">
               <dt>CUIT</dt>
-              <dd>{{ supplier.fiscal_data.cuit }}</dd>
+              <dd>{{ supplier.fiscal_data.cuit | fmt_cuit }}</dd>
             </dl>
             <dl v-if="supplier.fiscal_data.iibb">
               <dt>Ingresos Brutos</dt>
@@ -66,41 +66,29 @@
       </md-layout>
 
       <md-layout md-flex="50">
-        <md-card>
+        <md-card class="contact-data" v-if="supplier.email || supplier.phone || supplier.address || supplier.web">
           <md-card-header>
             <div class="md-title">Contacto</div>
             <md-button class="md-icon-button edit md-dense"><md-icon>edit</md-icon></md-button>
           </md-card-header>
           <md-card-content>
             <md-list class="md-double-line md-dense">
-              <template>
-                <md-list-item>
-                  <md-icon class="md-primary">email</md-icon>
+              <template v-if="supplier.email.length">
+                <md-list-item v-for="(email, index) in supplier.email" :class="{'md-inset': index > 0 }">
+                  <md-icon class="md-primary" v-if="index === 0">email</md-icon>
                   <div class="md-list-text-container">
-                    <span>email 1</span>
-                    <span>email type</span>
-                  </div>
-                </md-list-item>
-                <md-list-item class="md-inset">
-                  <div class="md-list-text-container">
-                    <span>email 2</span>
-                    <span>email type</span>
+                    <span>{{ email.email }}</span>
+                    <span>{{ email.email_type }}</span>
                   </div>
                 </md-list-item>
                 <md-divider></md-divider>
               </template>
-              <template>
-                <md-list-item>
-                  <md-icon class="md-primary">phone</md-icon>
+              <template v-if="supplier.phone.length">
+                <md-list-item v-for="(phone, index) in supplier.phone" :class="{'md-inset': index > 0 }">
+                  <md-icon class="md-primary" v-if="index === 0">phone</md-icon>
                   <div class="md-list-text-container">
-                    <span>phone number 1</span>
-                    <span>phone type</span>
-                  </div>
-                </md-list-item>
-                <md-list-item class="md-inset">
-                  <div class="md-list-text-container">
-                    <span>phone number 2</span>
-                    <span>phone type</span>
+                    <span>{{ phone.number }}</span>
+                    <span>{{ phone.phone_type }}</span>
                   </div>
                 </md-list-item>
                 <md-divider></md-divider>
@@ -113,12 +101,13 @@
                 <md-divider></md-divider>
               </md-list-item>
               <template v-if="supplier.address.length">
-                <md-list-item>
-                  <md-icon class="md-primary">place</md-icon>
+                <md-list-item v-for="(address, index) in supplier.address" :class="{'md-inset': index > 0}">
+                  <md-icon class="md-primary" v-if="index === 0">place</md-icon>
                   <div class="md-list-text-container">
-                    <span>{{ supplier.address[0].street }} {{ supplier.address[0].streetnumber }}</span>
-                    <span>{{ supplier.address[0].address_type }}</span>
+                    <span>{{ address.street }} {{ address.streetnumber }}</span>
+                    <span>{{ address.address_type }}</span>
                   </div>
+                  <md-divider></md-divider>
                 </md-list-item>
               </template>
             </md-list>
@@ -173,6 +162,12 @@ export default {
           height: 20px;
           min-height: 20px;
         }
+      }
+    }
+
+    &.contact-data {
+      .md-divider:last-child {
+        display: none;
       }
     }
   }

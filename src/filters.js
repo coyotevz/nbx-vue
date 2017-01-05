@@ -41,4 +41,8 @@ export default function filters(Vue) {
     if (!isNaN(value)) return accounting.formatNumber(value, numberOptions)
     return value
   })
+
+  Vue.filter('fmt_cuit', value => {
+    return value.replace(/(\d\d)(\d{8})(\d)/, '$1-$2-$3')
+  })
 }
