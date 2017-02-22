@@ -1,10 +1,9 @@
-import pickBy from 'lodash.pickby'
 import cloneDeep from 'lodash.clonedeep'
 
 export { cloneDeep }
 
 export function paddingLeft(padding, value) {
-  return String(padding + value).slice(-Math.max(padding.length, value.toString().length));
+  return String(padding + value).slice(-Math.max(padding.length, value.toString().length))
 }
 
 // Calculates the diffeernce between new and orig objects
@@ -17,21 +16,17 @@ export function diff(origObject, newObject) {
     if (origObject.hasOwnProperty(prop) && prop !== '__proto__') { // !['__proto__', '__obj__'].includes(prop)) {
       if (!newObject.hasOwnProperty(prop)) {
         r[prop] = origObject[prop]
-      }
-      else if (origObject[prop] === Object(origObject[prop])) {
+      } else if (origObject[prop] === Object(origObject[prop])) {
         let difference = diff(origObject[prop], newObject[prop])
         if (Object.keys(difference).length > 0) {
           r[prop] = difference
         }
-      }
-      else if (origObject[prop] !== newObject[prop]) {
+      } else if (origObject[prop] !== newObject[prop]) {
         if (newObject[prop] === undefined) {
           r[prop] = 'undefined'
-        }
-        else if (newObject[prop] === null) {
+        } else if (newObject[prop] === null) {
           r[prop] = null
-        }
-        else {
+        } else {
           r[prop] = newObject[prop]
         }
       }
